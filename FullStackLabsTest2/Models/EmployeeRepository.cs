@@ -52,7 +52,6 @@ namespace FullStackLabsTest2.Models
 
         public bool DeleteEmployee(int id)
         {
-            // todo: should check weather related entities are deleting
             var emp = _context.Employees
                 .Include(e => e.Addresses)
                 .Include(q => q.Qualifications)
