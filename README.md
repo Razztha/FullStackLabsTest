@@ -17,7 +17,7 @@ In Visual Studio 2019:
 Add-Migration Initial
 Update-Database
 ```
-4. Change the appUrl in environment.ts in clientApp (eg: appUrl:'http://localhost:5000/')
+4. Change the appUrl in environment.ts in clientApp (eg: appUrl: 'http://localhost:5000/')
 5. Now press F5 and run the application. You will have an empty blog list to start with
 
 ## Debugging
