@@ -1,0 +1,51 @@
+<h3 class="mt-3">Employee List</h3>
+<div class="row mb-3">
+  <div class="col-sm-1">
+    <a [routerLink]="['/create']" class="btn btn-primary">Create</a>
+  </div>
+  
+  <div class="float-right offset-9 col-sm-2">
+    <select class="form-control" (change)="onFilterChange($event)">
+      <option selected value = "2">All</option>
+      <option value="0">Degree</option>
+      <option value="1">Diploma</option>
+    </select>
+  </div>
+</div>
+<table class="table table-sm table-hover" >
+    <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Telephone</th>
+          <th>Permanant Address</th>
+          <th>Temporary Address</th>
+          <th>Qualification</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let emp of employeeList;index as i;">
+            <td>{{ emp.id }}</td>
+            <td>{{ emp.firstName }}</td>
+            <td>{{ emp.lastName }}</td>
+            <td>{{ emp.email }}</td>
+            <td>{{ emp.telephone }}</td>
+            <td>{{ emp.addresses[0].line1 + '' + emp.addresses[0].line2 }}</td>
+            <td>{{ emp.addresses[1].line1 + '' + emp.addresses[1].line2 }}</td>
+            <td>
+              <span *ngFor="let q of emp.qualifications;index as i">
+                {{getQulificationType(q.type) 
+                  + ((emp.qualifications.length > 0)  && (emp.qualifications.length != i+1) ? ' + ': '')}}
+              </span>
+            </td>
+            <td>
+              
+              <a [routerLink]="" (click) ="delete(emp.id)" class="btn btn-danger btn-sm float-right">Delete</a>
+              <a [routerLink]="['/employee/edit/', emp.id]" class="btn btn-primary btn-sm float-right mr-2">Edit</a>
+            </td>
+          </tr>
+      </tbody>
+</table>

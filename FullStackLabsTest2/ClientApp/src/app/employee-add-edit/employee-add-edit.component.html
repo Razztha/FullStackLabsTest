@@ -1,0 +1,90 @@
+<h3 class="mt-3">{{actionType}} Employee</h3>
+<form (ngSubmit)="save()" #formDir="ngForm" [formGroup]="form" novalidate class="mt-3">
+    <div class="form-group row">
+        <label class="control-label col-sm-2">First Name</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" formControlName="fname" placeholder="firstname">
+          <span class="text-danger" *ngIf="fname.invalid && formDir.submitted">
+            Firstname is required.
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Last Name</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" formControlName="lname" placeholder="lastname">
+          <span class="text-danger" *ngIf="lname.invalid && formDir.submitted">
+            Lastname is required.
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Email</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" formControlName="email" placeholder="email">
+          <span class="text-danger" *ngIf="email.invalid && email.errors.required && formDir.submitted">
+            Email is required.
+          </span>
+          <span class="text-danger" *ngIf="email.errors && email.errors.pattern && formDir.submitted">
+            Email must be a valid email address
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Telephone</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" formControlName="telephone" placeholder="telephone">
+          <span class="text-danger" *ngIf="telephone.invalid && telephone.errors.required && formDir.submitted">
+            Telephone is required.
+          </span>
+          <span class="text-danger" *ngIf="telephone.errors && telephone.errors.pattern && formDir.submitted">
+            Telephone must be a valid one.
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Permanent Address</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" formControlName="paddress" placeholder="permanent address">
+          <span class="text-danger" *ngIf="paddress.invalid && formDir.submitted">
+            Permanent address is required.
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Office Address</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" formControlName="taddress" placeholder="teporary address">
+          <span class="text-danger" *ngIf="taddress.invalid && formDir.submitted">
+            Office address is required.
+          </span>
+        </div>
+      </div>
+      <!-- <div class="form-group row">
+        <label class="control-label col-sm-2">Qualifications</label>
+        <div class="col-sm-10">
+            <label class="checkbox-inline mr-2"><input type="checkbox" value="0" (change)="onCheckboxChange($event)">Degree</label>
+            <label class="checkbox-inline"><input type="checkbox" value="1" (change)="onCheckboxChange($event)">Diploma</label>
+        </div>
+        <span class="text-danger" *ngIf="telephone.invalid && formDir.submitted">
+          At least one required.
+        </span>
+      </div> -->
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="qualification">Qualifications</label>
+        <div class="col-sm-10">
+            <div *ngFor="let q of formQualificationList;index as i;">
+            <label>
+                <input class="" type="checkbox" [value]="q.id"
+                    (change)="onCheckboxChange($event)" [checked]="(i == 0 && degreeChecked) || (i == 1 && diplomaChecked)"/>
+                {{q.name}}
+            </label>
+            </div>
+            <span class="text-danger" *ngIf="errorMessage!=null && formDir.submitted">
+                {{this.errorMessage}}
+              </span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mr-1">{{actionType}}</button>
+      <a [routerLink]="['/']" class="btn btn-primary">cancel</a>
+</form>
